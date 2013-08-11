@@ -334,7 +334,9 @@ class Response(webob.Response):
         """Constructs a response with the default settings."""
         super(Response, self).__init__(*args, **kwargs)
         self.out = self
-        self.headers['Cache-Control'] = 'no-cache'
+        
+        if 'Cache-Control' not in self.headers:
+            self.headers['Cache-Control'] = 'no-cache'
 
     def write(self, text):
         """Appends a text to the response body."""
